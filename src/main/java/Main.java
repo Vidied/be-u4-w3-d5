@@ -1,4 +1,5 @@
 import dao.CatalogoDao;
+import dao.PrestitoDao;
 import entities.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -13,6 +14,7 @@ public class Main {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("u4w3d5");
         EntityManager em = emf.createEntityManager();
         CatalogoDao catalogoDao = new CatalogoDao(em);
+        PrestitoDao prestitoDao = new PrestitoDao(em);
 
         em.getTransaction().begin();
 
@@ -78,6 +80,10 @@ public class Main {
         em.persist(r2);
         em.persist(r3);
 
+        //Creazione utente
+        Utente davide = new Utente("Davide", "Pan", LocalDate.of(2001, 10, 19), 1234L);
+        prestitoDao.saveUtente(davide);
+
         em.getTransaction().commit();
 
         System.out.println("Salvataggio in DB con successo!");
@@ -111,6 +117,31 @@ public class Main {
             System.out.println(c.getTitolo());
         }
 
+
+
+        //Test salvataggio prestito
+        Prestito prestitoAttivo = new Prestito(davide, l2, LocalDate.now(), null);
+        prestitoDao.salvaPrestito(prestitoAttivo);
+
+        //Test salvataggio prestito scaduto
+        //Minus per simulare un prestito vecchio che in automatico darà scaduto
+        LocalDate vecchio = LocalDate.now().minusDays(40);
+        Prestito prestitoScaduto = new Prestito(davide, l3, vecchio, null);
+        prestitoDao.salvaPrestito(prestitoScaduto);
+
+        //Test ricerca prestiti attivi per tessera
+        List<Prestito> attivi = prestitoDao.findPrestitiAttivi(1234L);
+        System.out.println("Prestiti totali attivi per Davide: " + attivi.size());
+        for (Prestito p : attivi) {
+            System.out.println("- " + p.getElementoPrestato().getTitolo() + " (Scade il: " + p.getDataRestituzionePrevista() + ")");
+        }
+
+        //Test ricerca prestiti scaduti per tessera
+        List<Prestito> scaduti = prestitoDao.findPrestitiScaduti();
+        System.out.println("Prestiti attualmente scaduti nel sistema: " + scaduti.size());
+        for (Prestito p : scaduti) {
+            System.out.println("- " + p.getElementoPrestato().getTitolo() + " preso da " + p.getUtente().getNome() + " (Scaduto il: " + p.getDataRestituzionePrevista() + ")");
+        }
 
         em.close();
         emf.close();
