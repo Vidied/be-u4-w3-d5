@@ -59,7 +59,7 @@ public class CatalogoDao {
                 .setParameter("anno", anno)
                 .getResultList();
     }
-    
+
     public List<Catalogo> findByTitolo(String titolo){
         //LOWER per ovviamente rendere il testo case insensitive rendendo tutto minuscolo
         return em.createQuery("SELECT c FROM Catalogo c WHERE LOWER(c.titolo) LIKE :titolo", Catalogo.class)
