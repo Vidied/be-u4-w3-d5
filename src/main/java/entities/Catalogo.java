@@ -81,5 +81,5 @@ public abstract class  Catalogo {
         this.numeroPagine = numeroPagine;
     }
 
-    
+
 }

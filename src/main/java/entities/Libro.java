@@ -55,6 +55,7 @@ public class Libro extends Catalogo{
                 ", titolo: " + getTitolo() +
                 ", isbn: " + getIsbn() +
                 ", anno pubblicazione: " + getAnnoPub() +
+                ", numero pagine: " + getNumeroPagine() +
                 ", autore: " + autore +
                 ", genere: " + genere +
                 '}';
