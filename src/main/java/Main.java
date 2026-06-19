@@ -19,7 +19,7 @@ public class Main {
 
         Libro l1 = new Libro(
                 "Cicciobello tutorial",
-                123123123L,
+                1234567891234L,
                 LocalDate.of(2000, 10, 10),
                 20,
                 "Bello di mamma",
@@ -29,7 +29,7 @@ public class Main {
 
         Rivista r1 = new Rivista(
                 "Rivista isola dei famosi",
-                123123122L,
+                1234567891233L,
                 LocalDate.of(2002, 12, 12),
                 12,
                 Periodicita.MENSILE

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "Rivista")
+@Table(name = "riviste")
 @PrimaryKeyJoinColumn(name = "id")
 public class Rivista extends Catalogo{
 
