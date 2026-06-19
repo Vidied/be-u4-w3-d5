@@ -1,10 +1,7 @@
 package entities;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.PrimaryKeyJoinColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -17,13 +14,14 @@ public class Libro extends Catalogo{
     private String autore;
 
     @Column(nullable = false)
-    private String genere;
+    @Enumerated(EnumType.STRING)
+    private Genere genere;
 
 
 
     public Libro(){}
 
-    public Libro(String titolo, Long isbn, LocalDate annoPub, int numeroPagine, String autore, String genere) {
+    public Libro(String titolo, Long isbn, LocalDate annoPub, int numeroPagine, String autore, Genere genere) {
         super(titolo, isbn, annoPub, numeroPagine);
         this.autore = autore;
         this.genere = genere;
@@ -39,14 +37,13 @@ public class Libro extends Catalogo{
         this.autore = autore;
     }
 
-    public String getGenere() {
+    public Genere getGenere() {
         return genere;
     }
 
-    public void setGenere(String genere) {
+    public void setGenere(Genere genere) {
         this.genere = genere;
     }
-
 
     @Override
     public String toString() {
