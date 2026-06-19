@@ -81,7 +81,7 @@ public class Main {
         //Creazione utente
         Utente davide = new Utente("Davide", "Pan", LocalDate.of(2001, 10, 19), 1234L);
         prestitoDao.saveUtente(davide);
-        
+
 
         System.out.println("Salvataggio in DB con successo!");
 
