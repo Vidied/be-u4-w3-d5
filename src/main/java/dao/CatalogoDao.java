@@ -1,7 +1,6 @@
 package dao;
 
 import entities.Catalogo;
-import jakarta.persistence.Entity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
