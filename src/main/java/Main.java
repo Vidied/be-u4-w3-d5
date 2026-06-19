@@ -16,8 +16,6 @@ public class Main {
         CatalogoDao catalogoDao = new CatalogoDao(em);
         PrestitoDao prestitoDao = new PrestitoDao(em);
 
-        em.getTransaction().begin();
-
         //Creazione dei libbri
         Libro l1 = new Libro(
                 "Cicciobello tutorial",
@@ -83,8 +81,7 @@ public class Main {
         //Creazione utente
         Utente davide = new Utente("Davide", "Pan", LocalDate.of(2001, 10, 19), 1234L);
         prestitoDao.saveUtente(davide);
-
-        em.getTransaction().commit();
+        
 
         System.out.println("Salvataggio in DB con successo!");
 
